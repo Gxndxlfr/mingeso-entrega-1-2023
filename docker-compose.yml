@@ -1,0 +1,28 @@
+version: "3.8"
+services:
+  postgres-db:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./data/db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - "5432:5432"
+  app1:
+    container_name: proyecto_docker1
+    image: derflinger/proyecto_docker
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
+    deploy:
+      restart_policy:
+        condition: on-failure
+    depends_on:
+      - postgres-db
