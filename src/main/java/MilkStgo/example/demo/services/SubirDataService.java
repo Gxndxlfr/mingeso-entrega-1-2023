@@ -129,4 +129,8 @@ public class SubirDataService {
         dataRepository.deleteByProveedor(codigo);
         return "proveedor eliminado";
     }
+
+    public void vaciarBD() {
+        dataRepository.deleteAll();
+    }
 }

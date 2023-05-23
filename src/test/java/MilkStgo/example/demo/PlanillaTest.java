@@ -719,7 +719,7 @@ public class PlanillaTest {
         List<PlanillaEntity> planilla = new ArrayList<>();
 
         PlanillaEntity pl_1 = new PlanillaEntity(2, "11/02/03", "1212", "prov 1212",
-                                                   110, 11, 7.333333333333333,
+                                                   110, 11, 10.0,
                                                    0.0, 10, 0.0,5,0.0,
                                                 77000, 3300, -14300,9240,
                                                 0 , 0,0,75240,
@@ -727,7 +727,7 @@ public class PlanillaTest {
         planilla.add(pl_1);
 
         PlanillaEntity pl_2 = new PlanillaEntity(3, "11/02/03","1313","prov 1313",
-                                            110, 11, 7.333333333333333, 0.0,
+                                                110, 11, 10.0, 0.0,
                                                 25, 0.0, 10, 0.0, 60500,
                                             8800, -9900, 4840,0,
                                             0, 0, 64240, 0,
@@ -735,7 +735,7 @@ public class PlanillaTest {
         planilla.add(pl_2);
 
         PlanillaEntity pl_3 = new PlanillaEntity(4,"11/02/03","1414", "prov 1414",
-                                            110, 10, 7.333333333333333,
+                                            110, 10, 11.0,
                                                 0.0, 50, 0.0, 30,0.0,
                                             44000, 13200, 10450, 8800,
                                             0, 0, 0, 76450, 0,

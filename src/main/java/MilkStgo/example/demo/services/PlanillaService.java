@@ -101,7 +101,7 @@ public class PlanillaService {
             int pagoFinal = pagoTotal-retencion;
             System.out.println("pagoFinal= "+pagoFinal);
             //actualizar valores anterior quincena
-            actualizarPorcentajes(proveedor.getCodigo(),kilosLeche);
+
 
             //nueva entidad planilla
             String codigo = proveedor.getCodigo();
@@ -122,6 +122,8 @@ public class PlanillaService {
             System.out.println("varGrasa 2= "+varGrasa);
             double varSt = calcularVariacionSt(codigo);
             System.out.println("varSt 2= "+varSt);
+
+            actualizarPorcentajes(proveedor.getCodigo(),kilosLeche);
 
             int grasaActual = subirPorcentajeService.obtenerGrasaActual(codigo); ;
             int stActual = subirPorcentajeService.obtenerStActual(codigo);
@@ -225,7 +227,7 @@ public class PlanillaService {
         //obtener Porcentajes antiguos
         int stAntigua = registroQuincenaService.obtenerStAntigua(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(stActual,stAntigua);
+        double variacionPorcentual = calcularVariacionPorcentual(stAntigua,stActual);
         System.out.println("variacionSt 1= "+variacionPorcentual);
         return variacionPorcentual;
     }
@@ -234,14 +236,18 @@ public class PlanillaService {
 
         //calcular variación
         double variacionPorcentual = calcularVariacionGrasa(codigo);
-
+        System.out.println("---****----"+ variacionPorcentual);
         if(variacionPorcentual <= 0 && variacionPorcentual >= -15 ){
+            System.out.println("A");
             return 0;
         }else if(variacionPorcentual <= -16 && variacionPorcentual >= -25 ){
+            System.out.println("B");
             return 12;
         }else if(variacionPorcentual <= -26 && variacionPorcentual >= -40){
+            System.out.println("C");
             return 20;
         }else if(variacionPorcentual <= -41){
+            System.out.println("D");
             return 30;
         }
 
@@ -255,13 +261,14 @@ public class PlanillaService {
         //obtener Porcentajes antiguos
         int grasaAntigua = registroQuincenaService.obtenerGrasaAntigua(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(grasaActual, grasaAntigua);
+        double variacionPorcentual = calcularVariacionPorcentual(grasaAntigua, grasaActual);
 
         System.out.println("variacionGrasa 1= "+variacionPorcentual);
         return variacionPorcentual;
     }
     public double calcularVariacionPorcentual(int valor1, int valor2){
-
+        System.out.println("valor 1 -- "+valor1);
+        System.out.println("valor 2 -- "+valor2);
         if(valor1 == 0){
             return 0.0;
         }else{
@@ -301,7 +308,8 @@ public class PlanillaService {
         //obtener kilos antiguos
         int kilos_antiguos = registroQuincenaService.getKilosByCodigo(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(kilosActuales,kilos_antiguos);
+        System.out.println(kilosActuales +"||"+kilos_antiguos);
+        double variacionPorcentual = calcularVariacionPorcentual(kilos_antiguos,kilosActuales);
         System.out.println("variacionKilos 1= "+variacionPorcentual);
         return variacionPorcentual;
     }

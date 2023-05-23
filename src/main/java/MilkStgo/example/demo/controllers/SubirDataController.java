@@ -22,6 +22,7 @@ public class SubirDataController {
     public String upload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) {
         subirData.guardar(file);
         redirectAttributes.addFlashAttribute("mensaje", "¡Archivo Acopio.csv cargado correctamente!");
+        subirData.vaciarBD();
         subirData.leerCsv("Acopio.csv");
         return "redirect:/fileUpload";
     }

@@ -29,16 +29,6 @@ public class RegistroQuincenaTest {
     }
 
     @Test
-    void testsetAnteriorQuince(){
-        proveedorService.guardarProveedor("7","name 7","B");
-        String response = registroQuincenaService.setAnteriorQuince();
-        assertEquals("set quincena anterior", response);
-
-        proveedorService.eliminarProveedor("7");
-        registroQuincenaService.eliminarQuincena("7");
-    }
-
-    @Test
     void testGetKilosByCodigo(){
         proveedorService.guardarProveedor("8","name 8","B");
         registroQuincenaService.guardarRegistroQuincena("8","30","31","100");

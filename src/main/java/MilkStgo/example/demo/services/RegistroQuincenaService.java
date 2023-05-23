@@ -1,13 +1,10 @@
 package MilkStgo.example.demo.services;
 
-import MilkStgo.example.demo.entities.ProveedorEntity;
 import MilkStgo.example.demo.entities.RegistroQuincenaEntity;
 import MilkStgo.example.demo.repositories.ProveedorRepository;
 import MilkStgo.example.demo.repositories.RegistroQuincenaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class RegistroQuincenaService {
@@ -26,22 +23,6 @@ public class RegistroQuincenaService {
         registroQuincena.setKilos(kilos);
         registroQuincenaRepository.save(registroQuincena);
         return "nueva quincena";
-    }
-    public String setAnteriorQuince() {
-
-        List<ProveedorEntity> proveedores = proveedorRepository.findAll();
-
-
-
-        for(ProveedorEntity p:proveedores){
-            String codigo = p.getCodigo();
-            RegistroQuincenaEntity rq = registroQuincenaRepository.getByCodigo(codigo);
-
-            if(rq == null){
-                guardarRegistroQuincena(p.getCodigo(),"0","0","0");
-            }
-        }
-        return "set quincena anterior";
     }
 
     public int getKilosByCodigo(String codigo) {

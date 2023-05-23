@@ -24,7 +24,6 @@ public class PlanillaController {
     @GetMapping("/planilla")
     public String main(Model model){
 
-        registroQuincenaService.setAnteriorQuince();
         planillaService.vaciarBD();
         List<PlanillaEntity> planilla = planillaService.calcularPagos();
         model.addAttribute("planilla", planilla);
