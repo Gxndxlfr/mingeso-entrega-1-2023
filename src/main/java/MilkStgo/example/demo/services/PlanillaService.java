@@ -110,10 +110,11 @@ public class PlanillaService {
             System.out.println("nombre= "+nombre);
 
 
-            double promedioKlsLeche = kilosLeche/15.0;
+
             String quincena = subirDataService.obtenerFechaPorCodigo(codigo);
             System.out.println("quincena= "+quincena);
             int cantDias = contarDias(codigo);
+            double promedioKlsLeche = kilosLeche/(double)cantDias;
             System.out.println("cantDias 2= "+cantDias);
             double varLeche = calcularVariacionLeche(codigo);
             System.out.println("varLeche 2= "+varLeche);
@@ -224,7 +225,7 @@ public class PlanillaService {
         //obtener Porcentajes antiguos
         int stAntigua = registroQuincenaService.obtenerStAntigua(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(stAntigua,stActual);
+        double variacionPorcentual = calcularVariacionPorcentual(stActual,stAntigua);
         System.out.println("variacionSt 1= "+variacionPorcentual);
         return variacionPorcentual;
     }
@@ -254,7 +255,7 @@ public class PlanillaService {
         //obtener Porcentajes antiguos
         int grasaAntigua = registroQuincenaService.obtenerGrasaAntigua(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(grasaAntigua,grasaActual);
+        double variacionPorcentual = calcularVariacionPorcentual(grasaActual, grasaAntigua);
 
         System.out.println("variacionGrasa 1= "+variacionPorcentual);
         return variacionPorcentual;
@@ -300,7 +301,7 @@ public class PlanillaService {
         //obtener kilos antiguos
         int kilos_antiguos = registroQuincenaService.getKilosByCodigo(codigo);
         //calcular variación
-        double variacionPorcentual = calcularVariacionPorcentual(kilos_antiguos,kilosActuales);
+        double variacionPorcentual = calcularVariacionPorcentual(kilosActuales,kilos_antiguos);
         System.out.println("variacionKilos 1= "+variacionPorcentual);
         return variacionPorcentual;
     }
@@ -401,5 +402,9 @@ public class PlanillaService {
     public void eliminarPago(String codigo) {
 
         planillaRepository.deleteByCodigo(codigo);
+    }
+
+    public void vaciarBD() {
+        planillaRepository.deleteAll();
     }
 }

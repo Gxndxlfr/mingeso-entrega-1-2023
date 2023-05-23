@@ -29,25 +29,17 @@ public class RegistroQuincenaService {
     }
     public String setAnteriorQuince() {
 
-        List<RegistroQuincenaEntity> anteriorQuincena = registroQuincenaRepository.findAll();
         List<ProveedorEntity> proveedores = proveedorRepository.findAll();
 
-        int sizeAQ = anteriorQuincena.size();
-        int sizeP = proveedores.size();
-
-        if(sizeAQ == 0){ //si no existe quincena registrada
-            if(sizeP != 0){ //si tenemos empleados
-                for (ProveedorEntity p:proveedores){
-
-                    guardarRegistroQuincena(p.getCodigo(),"0","0","0");
 
 
-                }
-            }else{
-                return "no hay proveedores";
+        for(ProveedorEntity p:proveedores){
+            String codigo = p.getCodigo();
+            RegistroQuincenaEntity rq = registroQuincenaRepository.getByCodigo(codigo);
+
+            if(rq == null){
+                guardarRegistroQuincena(p.getCodigo(),"0","0","0");
             }
-
-
         }
         return "set quincena anterior";
     }
